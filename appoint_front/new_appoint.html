@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+    <html class="no-js">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>Appointment</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<meta name="author" content="Nelumbo" />
+
+		<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+		<link rel="shortcut icon" href="">
+
+		<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+		
+		<!-- Animate.css -->
+		<link rel="stylesheet" href="css/animate.css">
+		<!-- Icomoon Icon Fonts-->
+		<link rel="stylesheet" href="css/icomoon.css">
+		<!-- Bootstrap  -->
+		<link rel="stylesheet" href="css/bootstrap.css">
+		<!-- Owl Carousel -->
+		<link rel="stylesheet" href="css/owl.carousel.min.css">
+		<link rel="stylesheet" href="css/owl.theme.default.min.css">
+		<!-- Theme style  -->
+		<link rel="stylesheet" href="css/style.css">
+
+		<link href="css/dataTables.bootstrap4.css" rel="stylesheet">
+		<!-- Modernizr JS -->
+		<script src="js/modernizr-2.6.2.min.js"></script>
+		<link href="css/sweetalert.css" rel="stylesheet" type="text/css">
+		<!-- FOR IE9 below -->
+		<!--[if lt IE 9]>
+		<script src="js/respond.min.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+
+	<div id="fh5co-page">
+		<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
+		<aside id="fh5co-aside" role="complementary" class="border js-fullheight">
+
+				<h1 id="fh5co-logo"><a href="index.html"><img src="images/logo.png" alt=""></a></h1>
+				<nav id="fh5co-main-menu" role="navigation">
+					<ul>
+						<li ><a href="index.html">Dashboard</a></li>
+						<li class="fh5co-active"><a href="new_appoint.html">New appointment</a></li>					
+					</ul>
+				</nav>
+			</aside>
+
+		<div id="fh5co-main">
+			<div class="loader hide"></div>
+			<div class="fh5co-narrow-content">
+				<h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">New Appointment</span></h2>
+				<div class="row animate-box" data-animate-effect="fadeInLeft">
+					
+					<div class="col-md-12 col-sm-12 col-xs-12 col-xxs-12 work-item">
+						<div style="display: none;" class="alert alert-warning alert-dismissible alertEmails" role="alert">
+						  <strong>Add emails</strong> .
+						</div>
+					</div>
+
+					<div class="col-md-12 col-sm-12 col-xs-12 col-xxs-12 work-item">
+						<div style="display: none;" class="alert alert-success alert-dismissible sendSuccess" role="alert">
+						  <strong>Sending the successful appointment.</strong> .
+						</div>
+					</div>
+
+					<div class="col-md-12 col-sm-12 col-xs-12 col-xxs-12 work-item">
+						<form class="form row" id="new_form" action="" method="post">
+							
+				            <div class="form-group col-md-3 col-sm-6 col-xs-12 col-xxs-12">
+				                <label for="webinar">Webinar</label>
+				                <div class="controls">
+				                    <select required="" autofocus="autofocus" class="form-control" id="webinar">
+
+				                     </select>
+				                </div>
+				            </div>
+
+				            <div class="form-group col-md-3 col-sm-6 col-xs-12 col-xxs-12">
+				                <label for="date_started">Date Started</label>
+				                <div class="controls">
+				                    <input type="date" required="" class="form-control datepicker" placeholder="dd/mm/yyyy" id="date_started">
+				                </div>
+				            </div>
+
+				            <div class="form-group col-md-3 col-sm-6 col-xs-12 col-xxs-12">
+				                <label for="time">Time</label>
+				                <div class="controls">
+				                    <input type="time" required="" class="form-control" id="time">
+				                </div>
+				            </div>
+
+				            <div class="form-group col-md-3 col-sm-6 col-xs-12 col-xxs-12">
+				                <label for="timezone">Timezones</label>
+				                <div class="controls">
+				                    <select required="" class="form-control timezones" id="timezone">
+				                     </select>
+				                </div>
+				            </div>
+
+				            <div class="form-group col-md-6 col-sm-6 col-xs-12 col-xxs-12">
+				                <label for="email">Email</label>
+				                <div class="input-group">
+				                    <input type="email" class="form-control" id="email">	<div class="input-group-append">
+					                	<button type="button" onclick="validateEmail()" class="btn btn-warning">Add</button>
+					                </div>
+				                </div>
+
+				                <div style="margin-top: 10px; margin-bottom: 10px; display: none;" class="alert alert-warning alert-dismissible" role="alert">
+								  <strong>Email invalid!</strong> .
+								</div>
+								
+								<div class="form-group col-md-6 col-sm-12 col-xs-12 col-xxs-12" style="padding: 10px 15px 0 0;">
+									<label for="subject">Subject</label>
+					                <div class="input-group">
+					                    <input type="text" class="form-control" required="" id="subject">	
+					                </div>
+					            </div>
+					            <div class="form-group col-md-6 col-sm-12 col-xs-12 col-xxs-12" style="padding: 10px 0 0 15px">
+					                <label for="organizer">Organizer</label>
+					                <div class="input-group">
+					                    <input type="email" class="form-control" required="" id="organizer">	
+					                </div>
+					            </div>
+
+				            </div>
+
+				            <div class="form-group col-md-6 col-sm-6 col-xs-12 col-xxs-12">
+				                <label for="emails_added">Emails added</label>
+				                <div class="controls">
+				                    <textarea rows="6" disabled="" class="form-control" id="emails_added"></textarea>
+				                </div>
+				            </div>
+
+
+				            <div class="form-group col-md-12 col-sm-12 col-xs-12 col-xxs-12 text-center">
+				            	<button type="reset" class="btn btn-secondary clear">Reset</button>
+				            	<button type="submit" class="btn btn-primary">Schedule</button>
+				            </div>
+
+						</form>
+					</div>					
+				</div>
+			</div>		
+
+		</div>
+	</div>
+
+	<!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- Carousel -->
+	<script src="js/owl.carousel.min.js"></script>
+	<!-- Stellar -->
+	<script src="js/jquery.stellar.min.js"></script>
+	<!-- Waypoints -->
+	<script src="js/jquery.waypoints.min.js"></script>
+	<!-- MAIN JS -->
+	<script src="js/main.js"></script>
+	<script src="js/datatables.min.js"></script>
+	<script src="js/custom-request.js"></script>
+	<script src="js/custom_loader.js"></script>
+	<script src="js/sweetalert.min.js"></script>
+	<script src="js/timezones_json.js"></script>
+
+	<script>		
+		$(document).ready(function(){
+			loader();
+			timezoneSelect();
+
+			getRequestForm(`${url}api/webinar`)
+	        .then(function(data){
+	        	if(data.length < 1){
+                    $('#webinar').append('<option value="">No found</option>');
+                }else{
+                	$('#webinar').append('<option value="">Select</option>');
+                	for (var i = 0; i < data.data.length; i++) {
+                		
+                		$('#webinar').append('<option value="'+data.data[i].id+'">'+data.data[i].description+'</option>');
+                	}
+                }
+
+	        }).catch(function(error){
+	           $('#webinar').append('<option value="">No found</option>');
+	        });
+
+	        $('.clear').click(function() {
+			    $("textarea").text("");
+			    $('.sendSuccess').hide();
+			    $('.alertEmails').hide();
+			  });
+	        loader();
+	    });
+
+	    function validateEmail(){
+	    	$('.sendSuccess').hide();
+	    	var value = $("#email").val();
+	    	$('.alert').hide();
+	    	if(value.length>0){
+	    		if (/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(value)){
+   				   var emails = $('#emails_added').val();
+				   if(emails.length == 0){
+				   	    $('#emails_added').html(value);
+				   }else{
+				   		$('#emails_added').html(value + ',' + emails);
+				   }
+				   $("#email").val('');
+				   $('.alertEmails').hide();
+				  } else {
+				   $('.alert').show();
+				  }
+	    	}else{
+	    		return false;	    		
+	    	}
+	    }
+
+
+	    $( "#new_form" ).submit(function( event ) {  
+		  event.preventDefault();
+		  loader();
+		  $('.sendSuccess').hide();
+		  var id_webinars = $('#webinar').val();
+          var date_begin = $('#date_started').val();
+          var time = $('#time').val();    
+          var timezone = $('#timezone').val();
+          var timezone_text = $('#timezone option:selected').text();
+          var emails = $('#emails_added').val(); 
+          var subject = $('#subject').val();
+          var organizer = $('#organizer').val();
+
+          if(emails.length == 0){
+          	$('.alertEmails').show();
+          	return false;
+          }else{
+          	$('.alertEmails').hide();
+          }  
+
+		  postRequestForm(`${url}api/appointment`, 
+		  	{id_webinars:id_webinars, 
+	        date_begin:date_begin, 
+	        time: time, 
+	        timezone: timezone, 
+	        emails: emails,
+	        reason: subject,
+	        organizer: organizer
+	        })
+	        .then(function(data){
+	        	if(data['success']){
+	        		$('#new_form')[0].reset();
+	                $("textarea").text("");
+	                $('.sendSuccess').show();
+	        	}
+                loader();
+	        }).catch(function(error){
+	            alert("An error occurred while executing the query to the server "+String(error));
+	            loader();
+	        });
+
+	        
+		});
+
+	    
+	</script>
+
+	</body>
+</html>
+
