@@ -22,6 +22,7 @@
 		<link rel="stylesheet" href="css/icomoon.css">
 		<!-- Bootstrap  -->
 		<link rel="stylesheet" href="css/bootstrap.css">
+		<link href="css/bootstrap-tagsinput.css" rel="stylesheet" />
 		<!-- Owl Carousel -->
 		<link rel="stylesheet" href="css/owl.carousel.min.css">
 		<link rel="stylesheet" href="css/owl.theme.default.min.css">
@@ -104,44 +105,42 @@
 				                </div>
 				            </div>
 
-				            <div class="form-group col-md-6 col-sm-6 col-xs-12 col-xxs-12">
+				            <div class="form-group col-md-6 col-sm-6 col-xs-12 col-xxs-12 tags-default">
 				                <label for="email">Email</label>
-				                <div class="input-group">
-				                    <input type="email" class="form-control" id="email">	<div class="input-group-append">
-					                	<button type="button" onclick="validateEmail()" class="btn btn-warning">Add</button>
-					                </div>
-				                </div>
+				                <input type="text" class="form-control tags-input col-md-12" data-role="tagsinput" placeholder="Add email" />
 
-				                <div style="margin-top: 10px; margin-bottom: 10px; display: none;" class="alert alert-warning alert-dismissible" role="alert">
+				                <div style="margin-top: 10px; margin-bottom: 10px; display: none;" class="alert alert-warning alert-dismissible alertInvalid" role="alert">
 								  <strong>Email invalid!</strong> .
 								</div>
 								
-								<div class="form-group col-md-6 col-sm-12 col-xs-12 col-xxs-12 content-icp" style="padding: 10px 15px 0 0;">
-									<label for="subject">Subject</label>
-					                <div class="input-group">
-					                    <input type="text" class="form-control" required="" id="subject">	
-					                </div>
-					            </div>
-					            <div class="form-group col-md-6 col-sm-12 col-xs-12 col-xxs-12 content-icp" style="padding: 10px 0 0 15px">
-					                <label for="organizer">Organizer</label>
-					                <div class="input-group">
-					                    <input type="email" class="form-control" required="" id="organizer">	
-					                </div>
-					            </div>
-
 				            </div>
 
-				            <div class="form-group col-md-6 col-sm-6 col-xs-12 col-xxs-12">
+				            <div class="form-group col-md-3 col-sm-12 col-xs-12 col-xxs-12 content-icp" style="padding: 0 15px 0 0;">
+								<label for="subject">Subject</label>
+				                <div class="input-group">
+				                    <input type="text" class="form-control" required="" id="subject">	
+				                </div>
+				            </div>
+				            <div class="form-group col-md-3 col-sm-12 col-xs-12 col-xxs-12 content-icp" style="padding: 0 0 0 15px">
+				                <label for="organizer">Organizer</label>
+				                <div class="input-group">
+				                    <input type="email" class="form-control" required="" id="organizer">	
+				                </div>
+				            </div>
+
+				            <!-- <div class="form-group col-md-6 col-sm-6 col-xs-12 col-xxs-12">
 				                <label for="emails_added">Emails added</label>
 				                <div class="controls">
 				                    <textarea rows="6" disabled="" class="form-control" id="emails_added"></textarea>
 				                </div>
-				            </div>
+				            </div> -->
+
+				           
 
 
 				            <div class="form-group col-md-12 col-sm-12 col-xs-12 col-xxs-12 text-center">
 				            	<button type="reset" class="btn btn-secondary clear">Reset</button>
-				            	<button type="submit" class="btn btn-primary">Schedule</button>
+				            	<button type="button" class="btn btn-primary buttom-submit">Schedule</button>
 				            </div>
 
 						</form>
@@ -158,6 +157,7 @@
 	<script src="js/jquery.easing.1.3.js"></script>
 	<!-- Bootstrap -->
 	<script src="js/bootstrap.min.js"></script>
+	<script src="js/bootstrap-tagsinput.js"></script>
 	<!-- Carousel -->
 	<script src="js/owl.carousel.min.js"></script>
 	<!-- Stellar -->
@@ -177,6 +177,16 @@
 			loader();
 			timezoneSelect();
 
+			$('.tags-input').tagsinput({
+			  trimValue: true
+			});
+
+			$('.tags-input').on('beforeItemAdd', function(event) {
+				if(!validateEmail(event.item)){
+			   		event.cancel = true;
+			    }
+			});
+
 			getRequestForm(`${url}api/webinar`)
 	        .then(function(data){
 	        	if(data.length < 1){
@@ -194,37 +204,36 @@
 	        });
 
 	        $('.clear').click(function() {
-			    $("textarea").text("");
+	        	$('.tags-input').tagsinput('removeAll');
 			    $('.sendSuccess').hide();
 			    $('.alertEmails').hide();
 			  });
 	        loader();
 	    });
 
-	    function validateEmail(){
+	    function validateEmail(email){
 	    	$('.sendSuccess').hide();
-	    	var value = $("#email").val();
-	    	$('.alert').hide();
+	    	$('.alertEmails').hide();
+   		    $('.alertInvalid').hide();
+	    	var value = email;
+	    	$('.alertInvalid').hide();
 	    	if(value.length>0){
 	    		if (/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(value)){
-   				   var emails = $('#emails_added').val();
-				   if(emails.length == 0){
-				   	    $('#emails_added').html(value);
-				   }else{
-				   		$('#emails_added').html(value + ',' + emails);
-				   }
-				   $("#email").val('');
-				   $('.alertEmails').hide();
-				  } else {
-				   $('.alert').show();
-				  }
+   				    $('.alertEmails').hide();
+   				    $('.alertInvalid').hide();
+				    return true;
+				} else {
+				    $('.alertInvalid').show();
+				    return false;
+				}
 	    	}else{
+	    		$('.alertEmails').show();
 	    		return false;	    		
 	    	}
 	    }
 
 
-	    $( "#new_form" ).submit(function( event ) {  
+	    $( ".buttom-submit" ).click(function( event ) {  
 		  event.preventDefault();
 		  loader();
 		  $('.sendSuccess').hide();
@@ -233,7 +242,7 @@
           var time = $('#time').val();    
           var timezone = $('#timezone').val();
           var timezone_text = $('#timezone option:selected').text();
-          var emails = $('#emails_added').val(); 
+          var emails = $('.tags-input').val(); 
           var subject = $('#subject').val();
           var organizer = $('#organizer').val();
 
@@ -268,6 +277,13 @@
 	        
 		});
 
+
+	    $( 'form' ).bind('keypress', function(e){	    	
+		   if( e.keyCode == 13 && e.target.tagName == 'INPUT' && 
+			       !/^(button|reset|submit)$/i.test( e.target.type ) ) {
+			    return false;  // kill event
+			  }
+		 });
 	    
 	</script>
 
