@@ -244,7 +244,7 @@ figure {
 }
 @media screen and (max-width: 768px) {
   #fh5co-main .fh5co-narrow-content {
-    width: 100%;
+    width: 95%;
     padding-top: 2em;
   }
 }
@@ -633,7 +633,13 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
 @media screen and (max-width: 768px) {
   .fh5co-heading {
     font-size: 30px;
-    margin-bottom: 1em;
+    margin-top: 1em;
+  }
+  .content-icp{
+    padding: 0 !important;
+  }
+  .content-bottom{
+    padding-bottom: 10px;
   }
 }
 
