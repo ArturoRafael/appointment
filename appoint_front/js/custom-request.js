@@ -1,4 +1,4 @@
-var url = "http://localhost:8000/";
+var url = "http://meetingapi.nelumbo.com.co/";
 
 function getRequestForm(url) {
         return fetch(url, {            
