@@ -4,14 +4,14 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title>Appointment</title>
+		<title>Webinar Scheduler</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
 		<meta name="author" content="Nelumbo" />
 
 		<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-		<link rel="shortcut icon" href="">
+		<link rel="shortcut icon" href="images/NationWideFavicon.png">
 
 		<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
 		<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
@@ -43,33 +43,31 @@
 			<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
 			<aside id="fh5co-aside" role="complementary" class="border js-fullheight">
 
-				<h1 id="fh5co-logo"><a href="index.html"><img src="images/logo.png" alt="WWTC-Appointments-App"></a></h1>
+				<h1 id="fh5co-logo"><a href="index.html"><img src="images/NationWidePoweredbyWWTC.png" alt="NationWidePoweredbyWWTC-App"></a></h1>
 				<nav id="fh5co-main-menu" role="navigation">
 					<ul>
-						<li class="fh5co-active"><a href="index.html">Dashboard</a></li>
-						<li><a href="new_appoint.html">New appointment</a></li>					
+						<li class="fh5co-active"><a href="index.html">Agenda</a></li>
+						<li><a href="new_appoint.html">New Appointment</a></li>					
 					</ul>
 				</nav>
 			</aside>
 
 			<div id="fh5co-main">
 				<div class="loader hide"></div>
+				<img class="imgcorner" src="images/UpperCorner.png">
 				<div class="fh5co-narrow-content">
-					<h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">Dashboard</h2>
+					<h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">Agenda</h2>
 					<div class="row animate-box" data-animate-effect="fadeInLeft">
-						<div class="col-md-12 col-sm-12 col-xs-12 col-xxs-12 content-bottom">
-							<a href="#" onclick="loadTable()" class="btn btn-info btn-outline">Refresh</a>
-						</div>
 						<div class="col-md-12 col-sm-12 col-xs-12 col-xxs-12 work-item">
 							<div class="table-responsive">
 					            <table id="tableDashboard" class="myTableDas display nowrap table table-hover table-striped hide" cellspacing="0" width="100%">
 					                <thead>
 					                    <tr>
 					                        <th>Webinar</th>
-					                        <th>Date Start</th>                        
+					                        <th>Date</th>                        
 					                        <th>Time</th>
-					                        <th>TimeZone</th>
-					                        <th>Date Created</th>  
+					                        <th>Timezone</th>
+					                        <th>Created on</th>  
 					                        <th></th>                       
 					                    </tr>
 					                </thead>
@@ -124,9 +122,13 @@
 	                    }
 
 	                    var table =  $(".myTableDas").DataTable({                                                    
-	                            "dom": 'ftlp',                                         
+	                            "dom": '<"refresh-butom"f>t<"col-lg-4 col-md-6 pt-10" l><"col-lg-8 col-md-6 pt-10" p>',                                         
 	                            "displayLength": 25,
-	                            "data" : data.data,                                             
+	                            "data" : data.data,
+	                            "language": {
+							        "search": "_INPUT_",
+							        "searchPlaceholder": "Search..."
+							    },                                             
 	                            "columnDefs": [                                
 	                                {
 	                                    "targets": 5,
@@ -162,7 +164,15 @@
 		                                        }}                                                          
 	                              ] 
 	                    });
+	                     $('.myTableDas tbody').on('click', 'tr', function () {
+					        var data = table.row( this ).data();
+					        location.href= url_web+'new_appoint.html?meeting='+data['id'];
+					        
+					    });
+
+	                    $('.refresh-butom').prepend('<a href="#" onclick="loadTable()" class=""><i class="icon-refresh"></i></a>')
 	                }
+
 	                loader();
 	            
 	        }).catch(function(error){
@@ -173,7 +183,7 @@
 	        
 	    }
 		</script>
-
+				
 
 	</body>
 </html>

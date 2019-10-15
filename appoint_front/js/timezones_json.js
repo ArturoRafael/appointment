@@ -1,5 +1,5 @@
 var tzStrings = [
-    {"label":"Select","value":""},
+    {"label":"Select a timezone","value":""},
     {"label":"(GMT-12:00) International Date Line West","value":"Etc/GMT+12"},
     {"label":"(GMT-11:00) Midway Island, Samoa","value":"Pacific/Midway"},
     {"label":"(GMT-10:00) Hawaii","value":"Pacific/Honolulu"},

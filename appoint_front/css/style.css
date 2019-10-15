@@ -41,7 +41,7 @@ p {
 
 h1, h2, h3, h4, h5, h6 {
   color: #000;
-  font-family: "Montserrat", Arial, sans-serif;
+  font-family: "Roboto", Arial, sans-serif;
   font-weight: 700;
   margin: 0 0 30px 0;
 }
@@ -67,6 +67,22 @@ figure {
   background: #da1212;
 }
 
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  font-weight: 300;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  font-weight: 300;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  font-weight: 300;
+}
+
+html body .pt-10{
+  padding-top: 10px;
+}
+
 #fh5co-page {
   width: 100%;
   overflow: hidden;
@@ -81,10 +97,11 @@ figure {
   bottom: 0;
   top: 0;
   left: 0;
-  overflow-y: scroll;
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s;
+  -webkit-box-shadow: 10px 0 20px -4px #CCC;
+  box-shadow: 10px 0 20px -4px #CCC;
 }
 #fh5co-aside.border {
   border-right: 1px solid #e6e6e6;
@@ -125,26 +142,22 @@ figure {
 #fh5co-aside #fh5co-main-menu ul li a {
   color: rgba(0, 0, 0, 0.5);
   text-decoration: none;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  font-size: 15px;
-  font-weight: 300;
+  font-weight: 600;
   position: relative;
   -webkit-transition: 0.3s;
   -o-transition: 0.3s;
   transition: 0.3s;
   padding: 10px 10px;
-  letter-spacing: .2em;
-  font-family: "Montserrat", Arial, sans-serif;
+  letter-spacing: .05em;
 }
 #fh5co-aside #fh5co-main-menu ul li a:after {
   content: "";
   position: absolute;
-  height: 2px;
+  height: 3px;
   bottom: 7px;
   left: 10px;
   right: 10px;
-  background-color: #da1212;
+  background-color: #e98d3c;
   visibility: hidden;
   -webkit-transform: scaleX(0);
   -moz-transform: scaleX(0);
@@ -238,14 +251,17 @@ figure {
 }
 #fh5co-main .fh5co-narrow-content {
   position: relative;
-  width: 95%;
+  width: 100%;
   margin: 0 auto;
-  padding-top: 2.5em;
+  padding-left: 5rem;
+  margin-top: -5rem;
+  padding-right: 3rem;
 }
 @media screen and (max-width: 768px) {
   #fh5co-main .fh5co-narrow-content {
     width: 95%;
-    padding-top: 2em;
+    padding-left: 0rem;
+    margin-top: 0rem;
   }
 }
 
@@ -621,9 +637,7 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
   text-transform: uppercase;
 }
 
-.fh5co-heading {
-  font-size: 45px;
-}
+
 .fh5co-heading.fh5co-light {
   color: #fff;
 }
@@ -633,13 +647,15 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
 @media screen and (max-width: 768px) {
   .fh5co-heading {
     font-size: 30px;
-    margin-top: 1em;
   }
   .content-icp{
     padding: 0 !important;
   }
   .content-bottom{
     padding-bottom: 10px;
+  }
+  #fh5co-aside #fh5co-main-menu ul li a{
+    font-size: 22px;
   }
 }
 
@@ -882,6 +898,18 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
   color: #fff;
 }
 
+.btn-primary-custom {
+  background: #386d9c;
+  color: #fff;
+  border: 2px solid #386d9c;
+}
+
+.btn-primary-custom:hover, .btn-primary-custom:focus, .btn-primary-custom:active {
+  background: #fff !important;
+  border-color: #386d9c !important;
+  color: #386d9c !important;
+}
+
 .btn-success {
   background: #5cb85c;
   color: #fff;
@@ -899,6 +927,15 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
 .btn-success.btn-outline:hover, .btn-success.btn-outline:focus, .btn-success.btn-outline:active {
   background: #5cb85c;
   color: #fff;
+}
+
+.btn-secondary-custom {
+  background: #fff;
+  color: #386d9c ;
+  border: 2px solid #386d9c;
+}
+.btn-secondary-custom:hover, .btn-secondary-custom:focus, .btn-secondary-custom:active {
+   color: #386d9c !important;
 }
 
 .btn-info {
@@ -971,19 +1008,16 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
 }
 
 .form-control {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
   box-shadow: none;
   background: transparent;
   border: 2px solid rgba(0, 0, 0, 0.1);
-  height: 54px;
+  height: 45px;
   font-size: 18px;
   font-weight: 300;
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  -ms-border-radius: 0px;
-  border-radius: 0px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
 }
 .form-control:active, .form-control:focus {
   outline: none;
@@ -1144,6 +1178,117 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
   opacity: 0;
 }
 
+/* Tagsinput */
+.bootstrap-tagsinput{
+  border-radius: 10px;
+  min-height: 45px;
+
+}
+
+.bootstrap-tagsinput input{
+  padding: 4px 6px;
+  font-family: "Roboto", Arial, sans-serif;
+}
+
+.bootstrap-tagsinput .tag{
+  background-color: #386d9c !important
+}
+
+
+/*  Data Table */
+
+.table-responsive{
+  margin-top: -7.5rem;
+}
+
+@media screen and (max-width: 767px){
+  .table-responsive {
+    margin-top: 0px;
+  }
+}
+
+.refresh-butom{
+  display: inline-flex;
+  float: right;
+}
+
+.refresh-butom a{
+  align-items: center;
+  display: flex;
+  font-size: 30px;
+  text-align: center;
+  padding-right: 10px;
+  color: #337ab7;
+}
+
+.dataTables_length label select{
+    webkit-appearance: caret;
+    -moz-appearance: caret;
+    appearance: none;
+    box-shadow: none;
+    background: transparent;
+    border: 0px solid rgba(0, 0, 0, 0.1);
+    height: 54px;
+    font-size: 18px;
+    font-weight: 700;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    border-radius: 4px;
+    padding: 0px;
+}
+
+.dataTables_filter label input{
+  height: 45px;
+}
+
+.myTableDas tbody tr{
+  cursor: pointer;
+}
+
+.pagination{
+  border-radius: 10px;
+}
+
+.pagination > li > a, .pagination > li > span{
+  padding: 8px 20px;
+}
+
+.pagination > li:first-child > a, .pagination > li:first-child > span {
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.pagination > li:last-child > a, .pagination > li:last-child > span{
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus, .pagination > .active > span, .pagination > .active > span:hover, .pagination > .active > span:focus {
+    background-color: gray;
+    border-color: gray;
+    font-weight: 800;
+}
+
+/* Form New*/
+
+#new_form label{
+  font-weight: 500 !important;
+}
+
+#new_form .help-block{
+  font-size: 16px;
+}
+
+#new_form .form-control, #new_form .bootstrap-tagsinput{
+  background-color: #e4ebf6;
+}
+
+.bootstrap-tagsinput:active, .bootstrap-tagsinput:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: rgba(0, 0, 0, 0.4);
+}
 
 /*Loader */
 .hide{

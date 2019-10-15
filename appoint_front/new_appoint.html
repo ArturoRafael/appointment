@@ -4,14 +4,14 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title>Appointment</title>
+		<title>Webinar Scheduler</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
 		<meta name="author" content="Nelumbo" />
 
 		<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-		<link rel="shortcut icon" href="">
+		<link rel="shortcut icon" href="images/NationWideFavicon.png">
 
 		<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
 		<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
@@ -44,30 +44,31 @@
 		<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
 		<aside id="fh5co-aside" role="complementary" class="border js-fullheight">
 
-				<h1 id="fh5co-logo"><a href="index.html"><img src="images/logo.png" alt="WWTC-Appointments-App"></a></h1>
+				<h1 id="fh5co-logo"><a href="index.html"><img src="images/NationWidePoweredbyWWTC.png" alt="NationWidePoweredbyWWTC-App"></a></h1>
 				<nav id="fh5co-main-menu" role="navigation">
 					<ul>
-						<li ><a href="index.html">Dashboard</a></li>
-						<li class="fh5co-active"><a href="new_appoint.html">New appointment</a></li>					
+						<li ><a href="index.html">Agenda</a></li>
+						<li class="fh5co-active"><a href="new_appoint.html">New Appointment</a></li>					
 					</ul>
 				</nav>
 			</aside>
 
 		<div id="fh5co-main">
 			<div class="loader hide"></div>
+			<img class="imgcorner" src="images/UpperCorner.png">
 			<div class="fh5co-narrow-content">
 				<h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">New Appointment</span></h2>
 				<div class="row animate-box" data-animate-effect="fadeInLeft">
 					
-					<div class="col-md-12 col-sm-12 col-xs-12 col-xxs-12 work-item">
-						<div style="display: none;" class="alert alert-warning alert-dismissible alertEmails" role="alert">
+					<div style="display: none;" class="col-md-12 col-sm-12 col-xs-12 col-xxs-12 work-item alertEmails">
+						<div  class="alert alert-warning alert-dismissible" role="alert">
 						  <strong>Add emails</strong> .
 						</div>
 					</div>
 
-					<div class="col-md-12 col-sm-12 col-xs-12 col-xxs-12 work-item">
-						<div style="display: none;" class="alert alert-success alert-dismissible sendSuccess" role="alert">
-						  <strong>Sending the successful appointment.</strong> .
+					<div style="display: none;" class="col-md-12 col-sm-12 col-xs-12 col-xxs-12 work-item sendSuccess">
+						<div  class="alert alert-success alert-dismissible" role="alert">
+						  <strong>Appointment scheduled successfully!</strong> .
 						</div>
 					</div>
 
@@ -76,6 +77,7 @@
 							
 				            <div class="form-group col-md-3 col-sm-6 col-xs-12 col-xxs-12">
 				                <label for="webinar">Webinar</label>
+				                <span class="text-danger">*</span>
 				                <div class="controls">
 				                    <select required="" autofocus="autofocus" class="form-control" id="webinar">
 
@@ -84,14 +86,16 @@
 				            </div>
 
 				            <div class="form-group col-md-3 col-sm-6 col-xs-12 col-xxs-12">
-				                <label for="date_started">Date Started</label>
+				                <label for="date_started">Date</label>
+				                <span class="text-danger">*</span>
 				                <div class="controls">
-				                    <input type="date" required="" class="form-control datepicker" placeholder="dd/mm/yyyy" id="date_started">
+				                    <input type="text" required="" onblur="(this.type='text')" onfocus="(this.type='date')" class="form-control datepicker" placeholder="Select a date" id="date_started">
 				                </div>
 				            </div>
 
 				            <div class="form-group col-md-3 col-sm-6 col-xs-12 col-xxs-12">
 				                <label for="time">Time</label>
+				                <span class="text-danger">*</span>
 				                <div class="controls">
 				                    <input type="time" required="" class="form-control" id="time">
 				                </div>
@@ -99,39 +103,43 @@
 
 				            <div class="form-group col-md-3 col-sm-6 col-xs-12 col-xxs-12">
 				                <label for="timezone">Timezones</label>
+				                <span class="text-danger">*</span>
 				                <div class="controls">
 				                    <select required="" class="form-control timezones" id="timezone">
 				                     </select>
 				                </div>
 				            </div>
 
-				            <div class="form-group col-md-6 col-sm-6 col-xs-12 col-xxs-12 tags-default">
-				                <label for="email">Email</label>
-				                <input type="text" class="form-control tags-input col-md-12" data-role="tagsinput" placeholder="Add email" />
+				            <div class="form-group col-md-6 col-sm-6 col-xs-12 col-xxs-12">
+								<label for="subject">Subject</label>
+								<span class="text-danger">*</span>
+				                <div class="controls">
+				                    <input type="text" placeholder="Meeting Subject or title..." class="form-control" required="" id="subject">	
+				                </div>
+				            </div>
+				            <div class="form-group col-md-6 col-sm-6 col-xs-12 col-xxs-12">
+				                <label for="organizer">Organizer</label>
+				                <span class="text-danger">*</span>
+				                <div class="controls">
+				                    <input type="email" placeholder="Your email of the responsible for the meeting" class="form-control" required="" id="organizer">	
+				                </div>
+				            </div>
+
+				             <div class="form-group col-md-12 col-sm-12 col-xs-12 col-xxs-12 tags-default">
+				                <label for="email">Invites</label>
+				                <span class="text-danger">*</span>
+				                <input type="text" class="tags-input" data-role="tagsinput" placeholder="Type emails" />
+				                <span class="help-block">Type the emails of the people that you want to invite to this meeting.</span>
 
 				                <div style="margin-top: 10px; margin-bottom: 10px; display: none;" class="alert alert-warning alert-dismissible alertInvalid" role="alert">
-								  <strong>Email invalid!</strong> .
+								  <strong>Invalid email!</strong> .
 								</div>
 								
 				            </div>
 
-				            <div class="form-group col-md-3 col-sm-12 col-xs-12 col-xxs-12 content-icp" style="padding: 0 15px 0 0;">
-								<label for="subject">Subject</label>
-				                <div class="input-group">
-				                    <input type="text" class="form-control" required="" id="subject">	
-				                </div>
-				            </div>
-				            <div class="form-group col-md-3 col-sm-12 col-xs-12 col-xxs-12 content-icp" style="padding: 0 0 0 15px">
-				                <label for="organizer">Organizer</label>
-				                <div class="input-group">
-				                    <input type="email" class="form-control" required="" id="organizer">	
-				                </div>
-				            </div>
-
-
-				            <div class="form-group col-md-12 col-sm-12 col-xs-12 col-xxs-12 text-center">
-				            	<button type="reset" class="btn btn-secondary clear">Reset</button>
-				            	<button type="button" class="btn btn-primary buttom-submit">Schedule</button>
+				            <div class="form-group col-md-12 col-sm-12 col-xs-12 col-xxs-12 text-right">
+				            	<button type="reset" class="btn btn-secondary-custom clear">Reset</button>
+				            	<button type="submit" class="btn btn-primary-custom buttom-submit">Schedule</button>
 				            </div>
 
 						</form>
@@ -183,7 +191,7 @@
 	        	if(data.length < 1){
                     $('#webinar').append('<option value="">No found</option>');
                 }else{
-                	$('#webinar').append('<option value="">Select</option>');
+                	$('#webinar').append('<option value="">Select a webinar</option>');
                 	for (var i = 0; i < data.data.length; i++) {
                 		
                 		$('#webinar').append('<option value="'+data.data[i].id+'">'+data.data[i].description+'</option>');
@@ -199,6 +207,37 @@
 			    $('.sendSuccess').hide();
 			    $('.alertEmails').hide();
 			  });
+
+
+	        var meeting = parseInt(getParameterByName('meeting'));
+	        if(meeting){
+	        	getRequestForm(`${url}api/appointment/${meeting}`)
+	        	.then(function(data){	        		
+	        		if(data.data.appoint){
+
+	        			$('#webinar').val(data.data.appoint.id_webinars);
+      					$('#date_started').val(data.data.appoint.date_begin); 
+      					$('#time').val(data.data.appoint.time);    
+    					$('#timezone').val(data.data.appoint.timezone);
+         				$('#subject').val(data.data.appoint.reason);
+     					$('#organizer').val(data.data.appoint.organizer);
+
+	        		}
+	        		if(data.data.aux){
+	        			var aux = data.data.aux;
+	        			for (var i = 0; i < aux.length; i++) {
+	        				$('.tags-input').tagsinput('add', aux[i]);
+	        			}
+	        			
+	        		}
+
+	        	
+	        	}).catch(function(error){
+	          		alert("An error occurred while consulting the event on the server "+String(error));
+	           });
+	        }
+
+
 	        loader();
 	    });
 
@@ -224,8 +263,8 @@
 	    }
 
 
-	    $( ".buttom-submit" ).click(function( event ) {  
-		  event.preventDefault();
+	    $( "#new_form" ).submit(function( event ) {  
+		  
 		  loader();
 		  $('.sendSuccess').hide();
 		  var id_webinars = $('#webinar').val();
@@ -239,6 +278,8 @@
 
           if(emails.length == 0){
           	$('.alertEmails').show();
+          	loader();
+          	event.preventDefault();
           	return false;
           }else{
           	$('.alertEmails').hide();
@@ -275,6 +316,13 @@
 			    return false;  // kill event
 			  }
 		 });
+
+	    function getParameterByName(name) {
+		    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+		    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+		    results = regex.exec(location.search);
+		    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+		}
 	    
 	</script>
 
