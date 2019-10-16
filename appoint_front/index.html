@@ -68,7 +68,8 @@
 					                        <th>Time</th>
 					                        <th>Timezone</th>
 					                        <th>Created on</th>  
-					                        <th></th>                       
+					                        <th>N° Emails</th>
+					                        <th>Option</th>
 					                    </tr>
 					                </thead>
 					                <tbody>                                                
@@ -131,11 +132,16 @@
 							    },                                             
 	                            "columnDefs": [                                
 	                                {
-	                                    "targets": 5,
+	                                    "targets": 6,
 	                                    "data": null,
 	                                    "className": "text-center",
-	                                    "defaultContent": "<td><a href='#' class='btnSearchAppoint'><i class='icon-search search'></i></td>"
+	                                    "defaultContent": "<td><a class='btnEditAppoint text-success pr-10' href='#'><i class='icon-pencil'></i></a><a href='#' class='btnTrashAppoint'><i class='icon-trash'></i></a></td>"
+	                                },
+	                                {
+	                                    "targets": 5,
+	                                    "className": "text-center"              
 	                                }
+	                                
 	                            ],
 	                            "columns": [  
 	                                  {"data" : "webinar.description", "visible": true},
@@ -148,7 +154,7 @@
 	                                  {"data" : "time", "visible": true},
 	                                  {"data" : "timezone", "visible": true,
 	                              				"render": function ( data, type, row, meta ) {
-		                                            var trimmedString = data.substring(0, 40);
+		                                            var trimmedString = data.substring(0, 20);
     												return '<span title="'+data+'">'+trimmedString + '...</span>';                                                                          
 		                                        }},
 	                                  {"data" : "created_at", "visible": true,
@@ -164,10 +170,28 @@
 		                                        }}                                                          
 	                              ] 
 	                    });
-	                     $('.myTableDas tbody').on('click', 'tr', function () {
-					        var data = table.row( this ).data();
+	                    $('.myTableDas tbody').on('click', 'tr .btnEditAppoint', function (event) {
+	                    	event.preventDefault();
+					        var data = table.row( $(this).closest('tr') ).data();
 					        location.href= url_web+'new_appoint.html?meeting='+data['id'];
 					        
+					    });
+
+					    $('.myTableDas tbody').on('click', 'tr .btnTrashAppoint', function (event) {
+					    	event.preventDefault();
+					    	loader();
+					    	var item = $(this).closest('tr');
+					        var ddata = table.row( $(this).closest('tr') ).data();
+					        getRequestForm(`${url}api/change_status/${ddata['id']}`)
+	        				.then(function(data){
+	        					if(data['success']){
+		        					item.remove();
+		        					loader();
+    							}
+	        				}).catch(function(error){
+	        					alert("An error occurred while executing the query to the server "+String(error));
+	        				});
+
 					    });
 
 	                    $('.refresh-butom').prepend('<a href="#" onclick="loadTable()" class=""><i class="icon-refresh"></i></a>')

@@ -1,6 +1,6 @@
-var url = "http://meetingapi.nelumbo.com.co/";
+var url = "https://apisheduler.worldwidetechconnections.com/";
 //var url = "http://localhost:8000/";
-var url_web = "http://meeting.nelumbo.com.co/";
+var url_web = "https://sheduler.worldwidetechconnections.com/";
 function getRequestForm(url) {
         return fetch(url, {            
             method: 'GET',            

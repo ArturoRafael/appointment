@@ -83,6 +83,10 @@ html body .pt-10{
   padding-top: 10px;
 }
 
+html body .pr-10{
+  padding-right: 10px;
+}
+
 #fh5co-page {
   width: 100%;
   overflow: hidden;
@@ -1240,10 +1244,6 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
 
 .dataTables_filter label input{
   height: 45px;
-}
-
-.myTableDas tbody tr{
-  cursor: pointer;
 }
 
 .pagination{
