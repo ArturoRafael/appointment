@@ -27,12 +27,13 @@
 		<link rel="stylesheet" href="css/owl.carousel.min.css">
 		<link rel="stylesheet" href="css/owl.theme.default.min.css">
 		<!-- Theme style  -->
-		<link rel="stylesheet" href="css/style.css">
+		
 
 		<link href="css/dataTables.bootstrap4.css" rel="stylesheet">
 		<!-- Modernizr JS -->
-		<script src="js/modernizr-2.6.2.min.js"></script>
+		
 		<link href="css/sweetalert.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="css/style.css">
 		<!-- FOR IE9 below -->
 		<!--[if lt IE 9]>
 		<script src="js/respond.min.js"></script>
@@ -60,13 +61,13 @@
 				<h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">New Appointment</span></h2>
 				<div class="row animate-box" data-animate-effect="fadeInLeft">
 					
-					<div style="display: none;" class="col-md-12 col-sm-12 col-xs-12 col-xxs-12 work-item alertEmails">
+					<div class="col-md-12 col-sm-12 col-xs-12 col-xxs-12 work-item alertEmails" style="display: none;">
 						<div  class="alert alert-warning alert-dismissible" role="alert">
 						  <strong>Add emails</strong> .
 						</div>
 					</div>
 
-					<div style="display: none;" class="col-md-12 col-sm-12 col-xs-12 col-xxs-12 work-item sendSuccess">
+					<div class="col-md-12 col-sm-12 col-xs-12 col-xxs-12 work-item sendSuccess" style="display: none;">
 						<div  class="alert alert-success alert-dismissible" role="alert">
 						  <strong>Appointment scheduled successfully!</strong> .
 						</div>
@@ -110,21 +111,27 @@
 				                </div>
 				            </div>
 
-				            <div class="form-group col-md-6 col-sm-6 col-xs-12 col-xxs-12">
+				            <div class="form-group col-md-4 col-sm-4  col-xs-12 col-xxs-12">
 								<label for="subject">Subject</label>
 								<span class="text-danger">*</span>
 				                <div class="controls">
 				                    <input type="text" placeholder="Meeting Subject or title..." class="form-control" required="" id="subject">	
 				                </div>
 				            </div>
-				            <div class="form-group col-md-6 col-sm-6 col-xs-12 col-xxs-12">
+				            <div class="form-group col-md-4 col-sm-4  col-xs-12 col-xxs-12">
 				                <label for="organizer">Organizer</label>
 				                <span class="text-danger">*</span>
 				                <div class="controls">
 				                    <input type="email" placeholder="Your email of the responsible for the meeting" class="form-control" required="" id="organizer">	
 				                </div>
 				            </div>
-
+				             <div class="form-group col-md-4 col-sm-4 col-xs-12 col-xxs-12">
+								<label for="url">Url Meeting</label>
+								<span class="text-danger">*</span>
+				                <div class="controls">
+				                    <input type="url" placeholder="Url meeting" class="form-control" required="" id="url">	
+				                </div>
+				            </div>
 				             <div class="form-group col-md-12 col-sm-12 col-xs-12 col-xxs-12 tags-default">
 				                <label for="email">Invites</label>
 				                <span class="text-danger">*</span>
@@ -164,11 +171,12 @@
 	<!-- Waypoints -->
 	<script src="js/jquery.waypoints.min.js"></script>
 	<!-- MAIN JS -->
+	<script src="js/modernizr-2.6.2.min.js"></script>
 	<script src="js/main.js"></script>
 	<script src="js/datatables.min.js"></script>
 	<script src="js/custom-request.js"></script>
 	<script src="js/custom_loader.js"></script>
-	<script src="js/sweetalert.min.js"></script>
+	<script src="js/sweetalert.js"></script>
 	<script src="js/timezones_json.js"></script>
 
 	<script>		
@@ -220,6 +228,7 @@
       					$('#time').val(data.data.appoint.time);    
     					$('#timezone').val(data.data.appoint.timezone);
          				$('#subject').val(data.data.appoint.reason);
+         				$('#url').val(data.data.appoint.url);
      					$('#organizer').val(data.data.appoint.organizer);
 
 	        		}
@@ -233,7 +242,8 @@
 
 	        	
 	        	}).catch(function(error){
-	          		alert("An error occurred while consulting the event on the server "+String(error));
+	        		swal("Cancelled", "An error occurred while consulting the event on the server", "error");
+	          		console.log(String(error));
 	           });
 	        }
 
@@ -264,7 +274,7 @@
 
 
 	    $( "#new_form" ).submit(function( event ) {  
-		  
+		  event.preventDefault();
 		  loader();
 		  $('.sendSuccess').hide();
 		  var id_webinars = $('#webinar').val();
@@ -274,6 +284,7 @@
           var timezone_text = $('#timezone option:selected').text();
           var emails = $('.tags-input').val(); 
           var subject = $('#subject').val();
+          var url_mmeting = $('#url').val();
           var organizer = $('#organizer').val();
 
           if(emails.length == 0){
@@ -292,6 +303,7 @@
 	        timezone: timezone, 
 	        emails: emails,
 	        reason: subject,
+	        url: url_mmeting,
 	        organizer: organizer
 	        })
 	        .then(function(data){
@@ -301,8 +313,9 @@
 	                $('.sendSuccess').show();
 	        	}
                 loader();
+                swal("Good job!", "Appointment scheduled successfully!", "success")
 	        }).catch(function(error){
-	            alert("An error occurred while executing the query to the server "+String(error));
+	            console.log("An error occurred while executing the query to the server "+String(error));
 	            loader();
 	        });
 
